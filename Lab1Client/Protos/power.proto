@@ -1,0 +1,50 @@
+﻿syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+option csharp_namespace= "Lab1Client";
+package power;
+
+service PowerService {
+  rpc FindOne (HeroById) returns (Period);
+  rpc GetFieldForPeriod(FieldPeriod) returns (stream FieldResponse);
+  rpc GetAllFieldsForPeriod(Period) returns (stream AllFieldResponse);
+}
+
+
+message HeroById{
+  int32 a=1;
+  optional int32 b=2;
+}
+
+message FieldResponse{
+  string start=1;
+  string stop=2;
+  string time=3;
+  string value=4;
+  string field=5;
+  string measurement=6;
+}
+
+message AllFieldResponse{
+  string start=1;
+  string stop=2;
+  string time=3;
+  string measurement=4;
+  string global_active_power=5;
+  string global_reactive_power=6;
+  string global_intensity=7;
+  string sub_metering_1=8;
+  string sub_metering_2=9;
+  string sub_metering_3=10;
+  string voltage=11;
+}
+
+message Period{
+  string from=1;
+  optional string to=2;
+}
+
+message FieldPeriod{
+  string field=1;
+  Period period=2;
+}

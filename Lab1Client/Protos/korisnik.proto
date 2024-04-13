@@ -1,0 +1,37 @@
+﻿syntax = "proto3";
+
+option csharp_namespace= "Lab1Client";
+
+package lab1;
+
+service Lab1Server{
+	rpc DodajKorisnika(KorisnikMessage)returns (Reply);
+	rpc PreuzmiKorisnika(Id) returns (KorisnikMessage);
+	rpc IzmeniKorisnika(KorisnikMessage) returns (KorisnikMessage);
+	rpc ObrisiKorisnika(Id) returns (KorisnikMessage);
+
+	rpc PreuzmiKorisnike(IdRange) returns (stream KorisnikMessage);
+	rpc ObrisiKorisnike(stream Id) returns (stream Reply);
+}
+
+message KorisnikMessage{
+	 int32 id = 1;
+	string firstName = 2;
+	string lastName = 3;
+	optional string address = 4;
+	repeated string phoneNumber = 5;
+}
+
+message Id{
+	int32 id = 1;
+}
+
+message IdRange{
+	int32 odId= 1;
+	int32 doId= 2;
+
+}
+
+message Reply{
+	string Text = 1;
+}
