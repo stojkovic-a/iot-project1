@@ -11,6 +11,19 @@ service PowerService {
   rpc AddMeasurement(AllFieldsValue) returns (ResponseCode);
   rpc AddMeasurements(stream AllFieldsValue) returns (stream ResponseCode);
   rpc AddBulkMeasurements(Bulk) returns (ResponseCode);
+  rpc AddFieldToOutput(UpdateField) returns (ResponseCode);
+  rpc UpdateField(UpdateField) returns (ResponseCode);
+  rpc DeleteTimestamp(TimeStamp) returns (ResponseCode);
+  rpc DeleteRange(Period) returns(ResponseCode);
+  rpc MinFieldForPeriod(FieldPeriod) returns (FieldResponse);
+  rpc MinAllFieldsForPeriod(Period) returns (AllFieldValueResponse);
+  rpc MaxFieldForPeriod(FieldPeriod) returns (FieldResponse);
+  rpc MaxAllFieldsForPeriod(Period) returns (AllFieldValueResponse);
+  rpc AvgFieldForPeriod(FieldPeriod) returns (FieldValue);
+  rpc AvgAllFieldsForPeriod(Period) returns (AllFieldValueResponse);
+  rpc SumFieldForPeriod(FieldPeriod) returns (FieldValue);
+  rpc SumAllFieldsForPeriod(Period) returns (AllFieldValueResponse);
+
 }
 
 
@@ -19,11 +32,27 @@ message HeroById{
   optional int32 b=2;
 }
 
-
+message TimeStamp{
+  string timeStamp=1;
+}
+message UpdateField{
+  string timeStamp=1;
+  string field=2;
+  string value=3;
+}
 message ResponseCode{
   int32 status=1;
   string text=2;
 }
+
+message FieldValue{
+  string field=1;
+  string value=2;
+  string measurement=3;
+  string start=4;
+  string stop=5;
+}
+
 message FieldResponse{
   string start=1;
   string stop=2;
@@ -31,6 +60,10 @@ message FieldResponse{
   string value=4;
   string field=5;
   string measurement=6;
+}
+
+message AllFieldValueResponse{
+  repeated FieldResponse responses=1;
 }
 
 message AllFieldResponse{

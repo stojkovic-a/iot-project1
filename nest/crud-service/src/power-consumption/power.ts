@@ -15,14 +15,18 @@ export interface ProtoGrpcType {
   }
   power: {
     AllFieldResponse: MessageTypeDefinition
+    AllFieldValueResponse: MessageTypeDefinition
     AllFieldsValue: MessageTypeDefinition
     Bulk: MessageTypeDefinition
     FieldPeriod: MessageTypeDefinition
     FieldResponse: MessageTypeDefinition
+    FieldValue: MessageTypeDefinition
     HeroById: MessageTypeDefinition
     Period: MessageTypeDefinition
     PowerService: SubtypeConstructor<typeof grpc.Client, _power_PowerServiceClient> & { service: _power_PowerServiceDefinition }
     ResponseCode: MessageTypeDefinition
+    TimeStamp: MessageTypeDefinition
+    UpdateField: MessageTypeDefinition
   }
 }
 
