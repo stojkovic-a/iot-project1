@@ -26,7 +26,7 @@ export interface ProtoGrpcType {
     PowerService: SubtypeConstructor<typeof grpc.Client, _power_PowerServiceClient> & { service: _power_PowerServiceDefinition }
     ResponseCode: MessageTypeDefinition
     TimeStamp: MessageTypeDefinition
-    UpdateField: MessageTypeDefinition
+    UpdateFieldObject: MessageTypeDefinition
   }
 }
 

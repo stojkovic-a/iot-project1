@@ -1,0 +1,1 @@
+docker container run -d -p 7777:7777 --net BRIDGE --name client-service client-service:1

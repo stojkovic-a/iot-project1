@@ -45,19 +45,28 @@ async Task GetValues()
 
     try
     {
-        var call = client.GetFieldForPeriod(new FieldPeriod()
-        {
-            Field = "Voltage",
-            Period = new Period()
-            {
-                From = "2007-06-30T23:50:00Z"
-            }
-        });
+        //var call = client.GetFieldForPeriod(new FieldPeriod()
+        //{
+        //    Field = "Voltage",
+        //    Period = new Period()
+        //    {
+        //        From = "2007-06-30T23:50:00Z"
+        //    }
+        //});
 
-        await foreach (var resp in call.ResponseStream.ReadAllAsync())
+        //await foreach (var resp in call.ResponseStream.ReadAllAsync())
+        //{
+        //    Console.WriteLine(resp);
+        //}
+
+
+
+        var call=client.GetAllFieldsForPeriod(new Period()
         {
-            Console.WriteLine(resp);
-        }
+           From=""
+        })
+
+
         //var response = await client.FindOneAsync(new HeroById()
         //{
         //    A = 10,

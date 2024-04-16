@@ -18,6 +18,7 @@ import { Period } from './power/Period';
 import { FieldPeriod } from './power/FieldPeriod';
 import { AllFieldValueResponse } from './power/AllFieldValueResponse';
 import { FieldValue } from './power/FieldValue';
+import { UpdateFieldObject } from './power/UpdateFieldObject';
 
 @Injectable()
 export class PowerConsumptionService {
@@ -59,20 +60,6 @@ export class PowerConsumptionService {
         const dateFrom = new Date(startFrom)
         const dateTo = endAt == null ? new Date(Date.now()) : new Date(endAt);
 
-        // if (isNaN(Date.parse(startFrom)) && startFrom != null) {
-        //     subject.complete();
-        //     return;
-        // }
-
-        // if (isNaN(Date.parse(endAt)) && endAt != null) {
-        //     subject.complete();
-        //     return;
-        // }
-
-        // if (dateFrom >= dateTo) {
-        //     subject.complete();
-        //     return;
-        // }
         if (!this.verifyDates(startFrom, endAt)) {
             subject.complete();
             return;
@@ -194,7 +181,7 @@ export class PowerConsumptionService {
         }
     }
 
-    public async addFieldToOutput(data: UpdateField) {
+    public async addFieldToOutput(data: UpdateFieldObject) {
         if (isNaN(Date.parse(data.timeStamp))) {
             throw new error("Invalid date format")
         }
@@ -216,13 +203,12 @@ export class PowerConsumptionService {
         }
     }
 
-    public async updateField(data: UpdateField) {
+    public async updateField(data: UpdateFieldObject) {
         if (isNaN(Date.parse(data.timeStamp))) {
             throw new Error("Invalid date format")
         }
         const startRange = new Date(data.timeStamp).getTime() - 10;
         const endRange = new Date(data.timeStamp).getTime() + 10;
-
         const query =
             `from(bucket: "${this.config.get("BUCKET")}")
             |> range(start: ${new Date(startRange).toISOString()}, stop: ${new Date(endRange).toISOString()})

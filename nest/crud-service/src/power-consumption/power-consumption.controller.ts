@@ -20,6 +20,7 @@ import { UpdateField } from './power/UpdateField';
 import { TimeStamp } from './power/TimeStamp';
 import { FieldValue } from './power/FieldValue';
 import { AllFieldValueResponse } from './power/AllFieldValueResponse';
+import { UpdateFieldObject } from './power/UpdateFieldObject';
 
 @Controller('power-consumption')
 export class PowerConsumptionController {
@@ -51,7 +52,7 @@ export class PowerConsumptionController {
     getFieldForPeriod(data: FieldPeriod, metadata: Metadata, call: ServerUnaryCall<any, any>): Observable<FieldResponse> {
         try {
             const subject = new Subject<FieldResponse>();
-            this.powerService.getFieldForPeriod(data.period.from, data.period._to, data.field, subject)
+            this.powerService.getFieldForPeriod(data.period.from, data.period.to, data.field, subject)
             return subject.asObservable();
         }
         catch (error) {
@@ -133,7 +134,7 @@ export class PowerConsumptionController {
                 text: "Successful write"
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
             return {
                 status: 400,
                 text: "Something went wrong"
@@ -142,10 +143,9 @@ export class PowerConsumptionController {
     }
 
     @GrpcMethod('PowerService', 'AddFieldToOutput')
-    async addFieldToOutput(data: UpdateField, metadata: Metadata, call: ServerUnaryCall<any, any>): Promise<ResponseCode> {
+    async addFieldToOutput(data: UpdateFieldObject, metadata: Metadata, call: ServerUnaryCall<any, any>): Promise<ResponseCode> {
         try {
             const row = await this.powerService.addFieldToOutput(data)
-            console.log(row)
             return {
                 status: 200,
                 text: `${JSON.stringify(row[0])}`
@@ -161,7 +161,7 @@ export class PowerConsumptionController {
     }
 
     @GrpcMethod('PowerService', 'UpdateField')
-    async updateField(data: UpdateField, metadata: Metadata, call: ServerUnaryCall<any, any>): Promise<ResponseCode> {
+    async updateField(data: UpdateFieldObject, metadata: Metadata, call: ServerUnaryCall<any, any>): Promise<ResponseCode> {
         try {
             await this.powerService.updateField(data);
             return {
