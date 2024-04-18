@@ -16,6 +16,11 @@ namespace ClientService.Controllers
             _powerService = powerService;
         }
 
+        [HttpGet("Test")]
+        public ActionResult Test()
+        {
+            return Ok("test");
+        }
 
         [HttpGet("GetFieldForPeriod")]
         public async Task<ActionResult> GetFieldForPeriod(

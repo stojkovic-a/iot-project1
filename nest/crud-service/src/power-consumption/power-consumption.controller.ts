@@ -35,6 +35,13 @@ export class PowerConsumptionController {
     //     const data = await this.powerService.test();
     //     return data;
     // }
+    @GrpcMethod('PowerService', 'Test')
+    test(data: TimeStamp, metadata: Metadata, call: ServerUnaryCall<any, any>): TimeStamp {
+        console.log("Zahtev je primljen");
+        console.log(metadata);
+        console.log(call);
+        return data;
+    }
 
     @GrpcMethod('PowerService', 'FindOne')
     findOne(data: HeroById, metadata: Metadata, call: ServerUnaryCall<any, any>): Period {

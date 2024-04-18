@@ -5,6 +5,7 @@ import "google/protobuf/timestamp.proto";
 package power;
 
 service PowerService {
+  rpc Test(TimeStamp) returns (TimeStamp);
   rpc FindOne (HeroById) returns (Period);
   rpc GetFieldForPeriod(FieldPeriod) returns (stream FieldResponse);
   rpc GetAllFieldsForPeriod(Period) returns (stream AllFieldResponse);

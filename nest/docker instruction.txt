@@ -1,1 +1,1 @@
-docker run -p 3000:3000 -d --name nestjs-service --net BRIDGE nestjs-service:1
+docker run -p 7070:7070 -d --name nestjs-service --net BRIDGE -e INFLUX_API_TOKEN=SuEiYjOF3b0XwQoMV8r1F-lH-TNNIjmfQ472p7SbFBPW_2qmxyMsGSQrluWhDCtINPo-eVHp2jyfEtKB_HeY7g== -e INFLUX_URL=http://influxdb2:8086/ -e MEASUREMENT=power_consum -e ORGANIZATION=Elfak -e BUCKET=PowerConsumption -ti nestjs-service:2 bash

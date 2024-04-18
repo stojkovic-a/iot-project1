@@ -157,6 +157,15 @@ export interface PowerServiceClient extends grpc.Client {
   sumFieldForPeriod(argument: _power_FieldPeriod, options: grpc.CallOptions, callback: grpc.requestCallback<_power_FieldValue__Output>): grpc.ClientUnaryCall;
   sumFieldForPeriod(argument: _power_FieldPeriod, callback: grpc.requestCallback<_power_FieldValue__Output>): grpc.ClientUnaryCall;
   
+  Test(argument: _power_TimeStamp, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  Test(argument: _power_TimeStamp, metadata: grpc.Metadata, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  Test(argument: _power_TimeStamp, options: grpc.CallOptions, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  Test(argument: _power_TimeStamp, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  test(argument: _power_TimeStamp, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  test(argument: _power_TimeStamp, metadata: grpc.Metadata, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  test(argument: _power_TimeStamp, options: grpc.CallOptions, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  test(argument: _power_TimeStamp, callback: grpc.requestCallback<_power_TimeStamp__Output>): grpc.ClientUnaryCall;
+  
   UpdateField(argument: _power_UpdateFieldObject, metadata: grpc.Metadata, options: grpc.CallOptions, callback: grpc.requestCallback<_power_ResponseCode__Output>): grpc.ClientUnaryCall;
   UpdateField(argument: _power_UpdateFieldObject, metadata: grpc.Metadata, callback: grpc.requestCallback<_power_ResponseCode__Output>): grpc.ClientUnaryCall;
   UpdateField(argument: _power_UpdateFieldObject, options: grpc.CallOptions, callback: grpc.requestCallback<_power_ResponseCode__Output>): grpc.ClientUnaryCall;
@@ -203,6 +212,8 @@ export interface PowerServiceHandlers extends grpc.UntypedServiceImplementation 
   
   SumFieldForPeriod: grpc.handleUnaryCall<_power_FieldPeriod__Output, _power_FieldValue>;
   
+  Test: grpc.handleUnaryCall<_power_TimeStamp__Output, _power_TimeStamp>;
+  
   UpdateField: grpc.handleUnaryCall<_power_UpdateFieldObject__Output, _power_ResponseCode>;
   
 }
@@ -225,5 +236,6 @@ export interface PowerServiceDefinition extends grpc.ServiceDefinition {
   MinFieldForPeriod: MethodDefinition<_power_FieldPeriod, _power_FieldResponse, _power_FieldPeriod__Output, _power_FieldResponse__Output>
   SumAllFieldsForPeriod: MethodDefinition<_power_Period, _power_AllFieldValueResponse, _power_Period__Output, _power_AllFieldValueResponse__Output>
   SumFieldForPeriod: MethodDefinition<_power_FieldPeriod, _power_FieldValue, _power_FieldPeriod__Output, _power_FieldValue__Output>
+  Test: MethodDefinition<_power_TimeStamp, _power_TimeStamp, _power_TimeStamp__Output, _power_TimeStamp__Output>
   UpdateField: MethodDefinition<_power_UpdateFieldObject, _power_ResponseCode, _power_UpdateFieldObject__Output, _power_ResponseCode__Output>
 }

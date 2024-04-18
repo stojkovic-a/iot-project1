@@ -9,7 +9,7 @@ async function bootstrap() {
     options: {
       package: 'power',
       protoPath: join(__dirname, './power-consumption/power.proto'),
-      url:'localhost:3000'
+      url:'0.0.0.0:7070'
     }
   });
   await app.listen();
