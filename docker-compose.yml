@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  influxdb:
+    image: influxdb:2
+    container_name: influxdb-compose
+    networks:
+      - BRIDGE
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb2-data:/var/lib/influxdb2
+      - influxdb2-config:/etc/influxdb2
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: aleksandar10
+      DOCKER_INFLUXDB_INIT_PASSWORD: iotPassword10
+      DOCKER_INFLUXDB_INIT_ORG: Elfak
+      DOCKER_INFLUXDB_INIT_BUCKET: PowerConsumption
+      DOCKER_INFLUXDB_INIT_RETENTION: 0
+
+  nestjs-service-compose:
+    image: nestjs-service-auto:1
+    container_name: nestjs-service-compose
+    networks:
+      - BRIDGE
+    ports:
+      - "7070:7070"
+    depends_on:
+      - influxdb
+    environment:
+      INFLUX_API_TOKEN: "SuEiYjOF3b0XwQoMV8r1F-lH-TNNIjmfQ472p7SbFBPW_2qmxyMsGSQrluWhDCtINPo-eVHp2jyfEtKB_HeY7g=="
+      INFLUX_URL: "http://influxdb-compose:8086/"
+      MEASUREMENT: power_consum
+      ORGANIZATION: Elfak
+      BUCKET: PowerConsumption
+
+  client-service-compose:
+    image: client-service-compose:1
+    container_name: client-service-compose
+    networks:
+      - BRIDGE
+    ports:
+      - "7777:8080"
+    depends_on:
+      - influxdb
+
+networks:
+  BRIDGE:
+
+volumes:
+  influxdb2-config:
+    external: true
+    name: influxdb2-config
+  influxdb2-data:
+    external: true
+    name: influxdb2-data

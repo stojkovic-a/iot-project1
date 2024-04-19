@@ -10,4 +10,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/out ./
 EXPOSE 7777
-
+ENTRYPOINT ["dotnet", "ClientService.dll"]

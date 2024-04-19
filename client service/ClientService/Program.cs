@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGrpcClient<ClientService.PowerService.PowerServiceClient>(o =>
 {
-    o.Address = new Uri("http://nestjs-service:7070");
+    o.Address = new Uri("http://nestjs-service-compose:7070");
 });
 builder.Services.AddScoped<IPowerService, ClientService.Services.PowerService>();
 

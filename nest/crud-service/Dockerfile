@@ -6,3 +6,4 @@ COPY . .
 COPY .env .
 RUN npm run build
 EXPOSE 7070
+CMD ["npm", "run", "start:dev"]
