@@ -147,7 +147,15 @@ export class PowerConsumptionService {
 
     public async addMeasurement(value: AllFieldsValue) {
         const writeApi = this.client.getWriteApi(this.config.get("ORGANIZATION"), this.config.get("BUCKET"), 'ms');
-        const lineProtocol = `${this.config.get("MEASUREMENT")} Voltage=${value.voltage},Global_active_power=${value.globalActivePower},Global_intensity=${value.globalIntensity},Global_reactive_power=${value.globalReactivePower},Sub_metering_1=${value.subMetering_1},Sub_metering_2=${value.subMetering_2},Sub_metering_3=${value.subMetering_3} ${new Date(value.time).getTime()}`
+        const lineProtocol = `${this.config.get("MEASUREMENT")}
+         Voltage=${value.voltage},
+        Global_active_power=${value.globalActivePower},
+        Global_intensity=${value.globalIntensity},
+        Global_reactive_power=${value.globalReactivePower},
+        Sub_metering_1=${value.subMetering_1},
+        Sub_metering_2=${value.subMetering_2},
+        Sub_metering_3=${value.subMetering_3}
+         ${new Date(value.time).getTime()}`
         try {
             writeApi.writeRecord(lineProtocol);
         }

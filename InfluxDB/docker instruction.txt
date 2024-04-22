@@ -5,4 +5,4 @@ docker run --name influxdb2 --publish 8086:8086 --mount type=volume,source=influ
 
 
 
-influx write -b PowerConsumption -f /var/lib/influxdb2/household_power_consumption.csv --header "#constant measurement,power_consum" --header "#datatype double,double,double,double,double,double,double, dateTime"
+influx write -b PowerConsumption -f /var/lib/influxdb2/household_power_consumption.csv --header "#constant measurement,power_consum" --header "#datatype double,double,double,double,double,double,double,dateTime"
